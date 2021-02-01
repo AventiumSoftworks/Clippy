@@ -1,0 +1,23 @@
+{
+  "name": "clippy",
+  "version": "1.0.0",
+  "description": "Assistant pour le Discord du Helios Launcher",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geekcornergh/clippy.git"
+  },
+  "author": "GeekCorner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geekcornergh/clippy/issues"
+  },
+  "homepage": "https://github.com/geekcornergh/clippy#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "fs-extra": "^9.1.0"
+  }
+}
