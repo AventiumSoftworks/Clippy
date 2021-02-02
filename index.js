@@ -16,7 +16,7 @@ for (const file of commandfiles) {
 };
 client.on("ready", () => {
     console.log("Hello world!");
-    client.user.setPresence({ status: "online", activity: { name: `${config.prefix}help`, type: "WATCHING" } });
+    client.user.setPresence({ status: "idle", activity: { name: `${config.prefix}help`, type: "WATCHING" } });
 });
 client.on("message", (message) => {
     if (!message.content.startsWith(config.prefix) || message.author.bot) return;
@@ -33,6 +33,27 @@ client.on("message", (message) => {
             return message.channel.send(reply);
         };
     };
+
+    // Cooldown
+    if (!cooldowns.has(command.name)) {
+		cooldowns.set(command.name, new Discord.Collection());
+	}
+
+	const now = Date.now();
+	const timestamps = cooldowns.get(command.name);
+	const cooldownAmount = (command.cooldown || 3) * 1000;
+
+	if (timestamps.has(message.author.id)) {
+		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+		if (now < expirationTime) {
+			return message.react("⏰");
+		};
+	}
+
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
     // Execution
     try {
         command.execute(client, message, args);
@@ -46,17 +67,6 @@ client.on("message", (message) => {
         return message.reply('I can\'t execute that command inside DMs!');
     };
 
-    if (!cooldowns.has(command.name)) {
-        cooldowns.set(command.name, new Discord.Collection());
-    }
-    
-    const now = Date.now();
-    const timestamps = cooldowns.get(command.name);
-    const cooldownAmount = (command.cooldown || 3) * 1000;
-
-    if (timestamps.has(message.author.id)) {
-        message.react("⏰");
-    };
 })
 
 // Login
