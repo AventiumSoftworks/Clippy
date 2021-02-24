@@ -2,7 +2,7 @@
 Assistant pour le <a href="https://discord.gg/zNWUXdt" target="_blank">Discord du Helios Launcher</a>
 
 ## Utilisation
-Copier le fichier `src/config.json`
+Copier le fichier `src/config.json.exexmple` vers `src/config.json`.
 Le remplir avec les valeurs nécésaires, exemple:
 ```json
 {
