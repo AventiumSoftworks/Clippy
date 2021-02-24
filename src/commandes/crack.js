@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 module.exports = {
-    name: 'crack',
-    description: 'About cracks.',
-    aliases: ['offline', 'cracks'],
+    name: 'crackfr',
+    description: 'À propos des cracks.',
+    aliases: ['offlinefr', 'cracksfr'],
     usage: '',
     cooldown: 5,
     execute(client, message, args) {
