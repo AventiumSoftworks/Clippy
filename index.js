@@ -2,7 +2,6 @@
 const config = require('./src/config.json');
 const Discord = require('discord.js');
 const client = new Discord.Client({ fetchAllMembers: true });
-const util = require('util');
 const fs = require('fs-extra');
 
 // Handler
