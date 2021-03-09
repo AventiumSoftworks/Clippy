@@ -20,6 +20,7 @@
   "dependencies": {
     "discord.js": "^12.5.1",
     "eslint": "^7.21.0",
-    "fs-extra": "^9.1.0"
+    "fs-extra": "^9.1.0",
+    "node-fetch": "^2.6.1"
   }
 }

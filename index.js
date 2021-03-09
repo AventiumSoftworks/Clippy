@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client({ fetchAllMembers: true });
 const fs = require('fs-extra');
 
-// Handler
+// Handler Commandes
 client.commands = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 
@@ -14,8 +14,16 @@ for (const file of commandfiles) {
 	client.commands.set(command.name, command);
 }
 
-// Events
-client.on('ready', () => {
+// Handler Events
+const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
+eventFiles.forEach(fEvt => {
+	const eventName = fEvt.split(".")[0];
+	const event = require(`./src/events/${fEvt}`);
+	client.on(eventName, event.bind(null, client));
+	delete require.cache[require.resolve(`./src/events/${fEvt}`)];
+});
+
+/*client.on('ready', () => {
 	let i = 0;
 	const status = [
 		`${client.users.cache.size} members.`,
@@ -24,12 +32,13 @@ client.on('ready', () => {
 		'and new messages.',
 		`my ping, that have an average of ${client.ws.ping}ms.`,
 		`my ${client.commands.size} commands.`,
+		``
 	];
 	console.log('Hello world!');
 	console.info(`Logged in as ${client.user.tag} with ID ${client.user.id}`);
 	client.user.setPresence({ status: 'online', activity: { name: `${config.prefix}help`, type: 'WATCHING' } });
 	setInterval(() => client.user.setActivity(`${config.prefix}help | ${status[i++ % status.length]}`, { type: 'WATCHING' }), 15000);
-});
+});*/
 client.on('message', (message) => {
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/);
