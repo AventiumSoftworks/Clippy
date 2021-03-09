@@ -12,3 +12,6 @@ Le remplir avec les valeurs nécésaires, exemple:
 ```
 Vous pouvez obtenir votre token <a href="https://discord.dev/" target="_blank">ici</a>.
 Choisissez votre préfixe, 1 ou 2 caractères suffisent.
+
+## Démarrer le bot
+Installer les dépendances via `npm i` et démarrer le bot via `npm start`
