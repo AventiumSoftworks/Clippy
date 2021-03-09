@@ -1,0 +1,7 @@
+{
+    "apps": [{
+        "name": "Clippy",
+        "cwd": "./",
+        "script": "index.js"
+    }]
+}
