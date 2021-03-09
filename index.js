@@ -1,6 +1,7 @@
 // Importation des librairies
 const config = require('./src/config.json');
 const Discord = require('discord.js');
+require('discord-reply');
 const client = new Discord.Client({ fetchAllMembers: true });
 const fs = require('fs-extra');
 
@@ -23,22 +24,6 @@ eventFiles.forEach(fEvt => {
 	delete require.cache[require.resolve(`./src/events/${fEvt}`)];
 });
 
-/*client.on('ready', () => {
-	let i = 0;
-	const status = [
-		`${client.users.cache.size} members.`,
-		`messages on ${client.channels.cache.size} channels.`,
-		'my source code on https://github.com/GeekCornerGH/Clippy.',
-		'and new messages.',
-		`my ping, that have an average of ${client.ws.ping}ms.`,
-		`my ${client.commands.size} commands.`,
-		``
-	];
-	console.log('Hello world!');
-	console.info(`Logged in as ${client.user.tag} with ID ${client.user.id}`);
-	client.user.setPresence({ status: 'online', activity: { name: `${config.prefix}help`, type: 'WATCHING' } });
-	setInterval(() => client.user.setActivity(`${config.prefix}help | ${status[i++ % status.length]}`, { type: 'WATCHING' }), 15000);
-});*/
 client.on('message', (message) => {
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/);
