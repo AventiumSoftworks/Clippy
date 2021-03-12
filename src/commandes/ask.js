@@ -13,6 +13,6 @@ module.exports = {
 			.addField('Did you already checked our Wiki?', 'It does contain some useful informations, so don\'t forget to [check it out](https://github.com/dscalzi/helioslauncher/wiki).')
 			.setTimestamp()
 			.setFooter(`Asked by ${message.author.tag}`, message.author.displayAvatarURL());
-		message.channel.send(ask);
+		message.lineReply(ask);
 	},
 };

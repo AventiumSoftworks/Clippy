@@ -6,6 +6,6 @@ module.exports = {
 	args: false,
 	guildOnly: true,
 	async execute(client, message) {
-		message.channel.send(`Pong 🏓 | Current API latency: ${client.ws.ping}ms`);
+		message.lineReply(`Pong 🏓 | Current API latency: ${client.ws.ping}ms`);
 	},
 };

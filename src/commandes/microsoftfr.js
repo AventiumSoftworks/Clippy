@@ -12,6 +12,6 @@ module.exports = {
 			.addField('Nous savons que le support de ces comptes est important, nous sommes en train de l\'implémenter.', 'Il n\'y a pas de date de sortie, mais si vous voulez nous aider, vous pouvez essayer [ce pull request](https://github.com/dscalzi/HeliosLauncher/pull/143) et partager vos commentaires. Attention, des bugs peuvent survenir.')
 			.setFooter(`Asked by ${message.author.tag}`, message.author.displayAvatarURL())
 			.setTimestamp();
-		message.channel.send(ms);
+		message.lineReply(ms);
 	},
 };

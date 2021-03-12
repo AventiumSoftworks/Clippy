@@ -12,6 +12,6 @@ module.exports = {
 			.addField('We know that the support of these accounts is important, we are in the process of implementing this.', 'There is no ETA, but if you want to help us, you can try [this pull request](https://github.com/dscalzi/HeliosLauncher/pull/143) and share you feedback. Warning, this is unstable')
 			.setFooter(`Asked by ${message.author.tag}`, message.author.displayAvatarURL())
 			.setTimestamp();
-		message.channel.send(ms);
+		message.lineReply(ms);
 	},
 };

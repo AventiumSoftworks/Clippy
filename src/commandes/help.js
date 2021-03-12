@@ -19,7 +19,7 @@ module.exports = {
 				.setColor('BLURPLE')
 				.setTimestamp()
 				.setFooter(`Asked by ${message.author.tag}`, message.author.displayAvatarURL());
-			return message.channel.send(help_embed);
+			return message.lineReply(help_embed);
 		}
 
 		const name = args[0].toLowerCase();
@@ -37,6 +37,6 @@ module.exports = {
 
 		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 
-		message.channel.send(data, { split: true });
+		message.lineReply(data, { split: true });
 	},
 };
