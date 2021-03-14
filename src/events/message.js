@@ -6,7 +6,7 @@ module.exports = async (client, message) => {
         if (message.channel.id == "302681957387599872") {
             if (message.embeds[0]) {
                 if (message.embeds[0].title.includes("New star added")) {
-                    message.react("❤");
+                    message.react("♥️");
                 }
             } 
         }
