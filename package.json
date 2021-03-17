@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
   "dependencies": {
     "discord-reply": "^0.0.9-a",
     "discord.js": "^12.5.1",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "fs-extra": "^9.1.0",
     "node-fetch": "^2.6.1"
   }
