@@ -37,6 +37,6 @@ module.exports = {
 
 		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 
-		message.lineReply(data, { split: true });
+		message.lineReply(data/*, { split: true }*/);
 	},
 };
