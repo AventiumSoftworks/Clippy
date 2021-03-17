@@ -8,7 +8,7 @@ const fs = require('fs-extra');
 // Handler Commandes
 client.commands = new Discord.Collection();
 const cooldowns = new Discord.Collection();
-client.cooldowns = cooldowns
+client.cooldowns = cooldowns;
 
 const commandfiles = fs.readdirSync('./src/commandes/').filter(file => file.endsWith('.js'));
 for (const file of commandfiles) {
@@ -19,7 +19,7 @@ for (const file of commandfiles) {
 // Handler Events
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 eventFiles.forEach(fEvt => {
-	const eventName = fEvt.split(".")[0];
+	const eventName = fEvt.split('.')[0];
 	const event = require(`./src/events/${fEvt}`);
 	client.on(eventName, event.bind(null, client));
 	delete require.cache[require.resolve(`./src/events/${fEvt}`)];
