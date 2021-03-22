@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/geekcornergh/clippy#readme",
   "dependencies": {
-    "discord-reply": "^0.0.9-a",
+    "discord-reply": "^0.1.2",
     "discord.js": "^12.5.1",
     "eslint": "^7.22.0",
     "fs-extra": "^9.1.0",
