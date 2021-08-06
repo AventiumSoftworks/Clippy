@@ -1,20 +1,15 @@
 // Importation des librairies
 const config = require('./src/config.json');
 const Discord = require('discord.js');
+const fs = require("fs-extra");
 require('discord-reply');
 const client = new Discord.Client({ fetchAllMembers: true });
-const fs = require('fs-extra');
+require('discord-buttons')(client);
 
-// Handler Commandes
-client.commands = new Discord.Collection();
-const cooldowns = new Discord.Collection();
-client.cooldowns = cooldowns;
+// Commandes slash
+require("./src/interactions/slash")(client);
+require("./src/interactions/buttons")(client);
 
-const commandfiles = fs.readdirSync('./src/commandes/').filter(file => file.endsWith('.js'));
-for (const file of commandfiles) {
-	const command = require(`./src/commandes/${file}`);
-	client.commands.set(command.name, command);
-}
 
 // Handler Events
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
