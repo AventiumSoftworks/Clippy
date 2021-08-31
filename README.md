@@ -14,6 +14,7 @@ Le remplir avec les valeurs nécésaires, exemple:
 botOwners sert à définir les personnes autorisées à utiliser la commande eval  
 Vous pouvez obtenir votre token <a href="https://discord.dev/" target="_blank">ici</a>.
 Choisissez votre préfixe, 1 ou 2 caractères suffisent.
+Tapez `[préfixe]register_commands` pour enregistrer les commandes, puis attendez environ une heure.
 
 ## Démarrer le bot
-Installer les dépendances via `npm i` et démarrer le bot via `npm start`
+Installer les dépendances via `yarn` et démarrer le bot via `yarn start`

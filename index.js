@@ -2,13 +2,13 @@
 const config = require('./src/config.json');
 const Discord = require('discord.js');
 const fs = require("fs-extra");
-require('discord-reply');
-const client = new Discord.Client({ fetchAllMembers: true });
-require('discord-buttons')(client);
+
+const client = new Discord.Client({ fetchAllMembers: true, intents: [32767] });
+
 
 // Commandes slash
-require("./src/interactions/slash")(client);
-require("./src/interactions/buttons")(client);
+//require("./src/interactions/slash")(client);
+//require("./src/interactions/buttons")(client);
 
 
 // Handler Events

@@ -21,7 +21,7 @@ module.exports = async (client) => {
 				data: {
 					type: 4,
 					data: {
-						content: `<@${interaction.member.user.id}>`,
+						content: `<@${args[0].value}>`,
 						embeds: [embed]
 					}
 				}
