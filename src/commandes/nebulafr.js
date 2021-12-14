@@ -20,7 +20,7 @@ module.exports = {
 		},
 		{
 			"title": "5.",
-			"description": "Crée le serveur avec `npm start -- generate server [nom du serveur] [Version de Minecraft ex 1.12.2] --forge [Version de Forge ex 14.23.5.2855]`. Forge est requis."
+			"description": "Crée le serveur avec `npm start -- generate server [nom du serveur] [Version de Minecraft ex 1.12.2] --forge [Version de Forge ex 14.23.5.2859]`. Forge est requis."
 		},
 		{
 			"title": "6.",
