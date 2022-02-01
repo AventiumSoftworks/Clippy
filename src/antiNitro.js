@@ -102,7 +102,7 @@ const trigger = async (message, client) => {
         channel = client.channels.cache.find(channel => channel.id === "283837935244148736");
     }
    else return;
-    message.channel.send("<@" + message.author.id + ">, account might be compromised.");
+    message.channel.send("<@" + message.author.id + ">'s account might be compromised.");
     let time = message.createdTimestamp
 
     const embed = new Discord.MessageEmbed()
@@ -118,7 +118,7 @@ const trigger = async (message, client) => {
     });
     message.delete().catch(error => { console.log(error) });
 
-    message.author.send(`3ADB63D1 \n We noticed you've been compromised by self-spreading malware (a worm) which takes over your account to send download links to this worm to others.\nAs a precaution, the bot has kicked you from the server.\nYou must run a Windows Defender full scan and change your password.\nTo join back, use this invite link: ${invite}`)
+    message.author.send(`3ADB63D1 \n We noticed you've been compromised by self-spreading malware (a worm) which takes over your account to send download links to this worm to others.\nAs a precaution, the bot has kicked you from the server.\nYou must run a Windows Defender full scan and change your password.\nDon't forget to reach out to Discord by opening a ticket (https://dis.gd/request) so they will help you to get your account back.\nTo join back, use this invite link: ${invite}`)
         .catch(console.error);
 }
 
