@@ -3,8 +3,8 @@ module.exports = {
 	"description": null,
 	"fields": [
 		{
-			"title": "We know that the support of these accounts is important, we are in the process of implementing this.",
-			"description": "There is no ETA, but if you want to help us, you can try [this pull request](https://github.com/dscalzi/HeliosLauncher/pull/143) and share you feedback. Warning, this is unstable"
+			"title": "Microsoft Accounts support has landed.",
+			"description": "Please merge [this commit](https://github.com/dscalzi/HeliosLauncher/commit/58e68c116c001ee36b8f504013f866d4b12d0db9), and follow [theses instructions](https://github.com/dscalzi/HeliosLauncher/blob/master/docs/MicrosoftAuth.md) to add support on your fork. Community's implementations aren't supported."
 		}
 	]
 }
