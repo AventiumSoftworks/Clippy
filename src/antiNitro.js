@@ -120,6 +120,8 @@ const trigger = async (message, client) => {
 
     message.author.send(`3ADB63D1 \n We noticed you've been compromised by self-spreading malware (a worm) which takes over your account to send download links to this worm to others.\nAs a precaution, the bot has kicked you from the server.\nYou must run a Windows Defender full scan and change your password.\nDon't forget to reach out to Discord by opening a ticket (https://dis.gd/request) so they will help you to get your account back.\nTo join back, use this invite link: ${invite}`)
         .catch(console.error);
+    // kick message author
+    message.guild.member(message.author).kick('Account compromised');
 }
 
 function similarity(s1, s2) {
