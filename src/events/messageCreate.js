@@ -183,6 +183,18 @@ module.exports = async (client, message) => {
             ]
         })
         await client.application?.commands.create({
+            "name": "gettingstartedfr",
+            "description": "Voici comment commencer avec Helios Launcher",
+            "options": [
+                {
+                    "type": 6,
+                    "name": "user",
+                    "description": "L'utilisateur à mentionner",
+                    "required": false
+                }
+            ]
+        })
+        await client.application?.commands.create({
             "name": "v14fr",
             "description": "Veuillez utiliser Node.JS 14",
             "options": [
@@ -196,6 +208,14 @@ module.exports = async (client, message) => {
         })
         await message.reply("I asked Discord to save the slash commands. Changes can take up to an hour to apply.")
     }
+    //debug
+    // else if (message.content == `${config.prefix}unregister_commands`) {
+    //     if (!config.botOwners.includes(message.author.id)) return message.reply(`Hello <@${message.author.id}>, you don't have permission to unregister slash commands.`, new Discord.MessageEmbed().setImage("https://media2.giphy.com/media/Ju7l5y9osyymQ/giphy.gif"));
+    //     await message.react("👌");
+    //     await await client.application?.commands.set([]);
+    //     await message.reply("I asked Discord to delete the slash commands. Changes can take up to an hour to apply.")
+    // }
+    //
     else if (message.content == `${config.prefix}clear`) {
         if (!message.guild.members.cache.get(message.author.id).permissions.has("MANAGE_MESSAGES")) return message.channel.send("❌ You don't have permission to do this.");
         if (!message.guild.members.cache.get(client.user.id).permissions.has("MANAGE_MESSAGES")) return message.channel.send("❌ I don't have permission to delete messages.");
@@ -238,4 +258,5 @@ module.exports = async (client, message) => {
             message.reply(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
         }
     }
+//done
 };
