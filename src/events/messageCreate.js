@@ -183,6 +183,18 @@ module.exports = async (client, message) => {
             ]
         })
         await client.application?.commands.create({
+            "name": "gettingstarted",
+            "description": "Here is how to get started with Helios Launcher",
+            "options": [
+                {
+                    "type": 6,
+                    "name": "user",
+                    "description": "The user to mention",
+                    "required": false
+                }
+            ]
+        })
+        await client.application?.commands.create({
             "name": "gettingstartedfr",
             "description": "Voici comment commencer avec Helios Launcher",
             "options": [
