@@ -1,17 +1,17 @@
-const {MessageEmbed, MessageButton, MessageActionRow} = require("discord.js");
+const {EmbedBuilder} = require("discord.js");
 module.exports = async (client, interaction) => {
     if (interaction.isCommand()) {
         const cmdfile = require(`../commandes/${interaction.commandName}.js`);
-        let embed = new MessageEmbed()
+        let embed = new EmbedBuilder()
             .setTitle(cmdfile.title)
-            .setColor("BLURPLE")
-            .setDescription(cmdfile.description != null ? cmdfile.description : "")
+            .setColor("Blurple")
+            .setDescription(cmdfile.description ?? null)
             .setTimestamp()
-            .setFooter((interaction.commandName.endsWith("fr") && !interaction.commandName.endsWith("frfr") ? "Demandé par : " : "Asked by : ") + interaction.user.tag, interaction.user.displayAvatarURL());
+            .setFooter({text:(interaction.commandName.endsWith("fr") && !interaction.commandName.endsWith("frfr") ? "Demandé par : " : "Requested by : ") + interaction.user.tag, iconURL: interaction.user.displayAvatarURL()});
         cmdfile.fields.forEach(field => {
-            embed.addField(field.title, field.description);
+            embed.addFields({name:field.title, value:field.description});
         });
-        interaction.reply({ content: interaction.options.getUser("user") ? `${interaction.options.getUser("user")}` : null, embeds: [embed], ephemeral: interaction.options.getUser("user")!== null ? false : true });
+        interaction.reply({ content: interaction.options.getUser("user") && interaction.options.getUser("user").id !== interaction.user.id ? `${interaction.options.getUser("user")}` : null, embeds: [embed], ephemeral: interaction.options.getUser("user") &&interaction.options.getUser("user").id!== interaction.user.id ? false : true });
     };
     if (interaction.isButton()) {
                 const Member = await interaction.guild.members.fetch({ user: interaction.user.id, force: true })

@@ -1,6 +1,6 @@
-//Thanks to rm20 for original code (https://github.com/rm20killer/react-bot/blob/main/commands/malchecker.js)
+// Thanks to rm20 for original code (https://github.com/rm20killer/react-bot/blob/main/commands/malchecker.js)
 let psl = require('psl');
-//const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+// const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 const Discord = require("discord.js")
 const list = require("./antiNitro/matchList");

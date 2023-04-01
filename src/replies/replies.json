@@ -1,0 +1,7 @@
+{
+	"use_crack": "crack",
+	"use_nebula": "nebula",
+	"server_side_error": "errorcodes",
+	"bad_host": "webhost",
+	"stuck_99": "99"
+}

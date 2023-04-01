@@ -1,9 +1,22 @@
 // Importation des librairies
 const config = require('./src/config.json');
-const Discord = require('discord.js');
+const { GatewayIntentBits, Partials, Client } = require('discord.js');
 const fs = require("fs-extra");
 
-const client = new Discord.Client({ fetchAllMembers: true, intents: [32767] });
+const client = new Client({
+	intents: [
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildMessageReactions
+	], partials: [
+		Partials.Message,
+		Partials.GuildMember,
+		Partials.Reaction,
+		Partials.User
+	]
+});
 
 
 // Commandes slash
@@ -12,7 +25,7 @@ const client = new Discord.Client({ fetchAllMembers: true, intents: [32767] });
 
 
 // Handler Events
-const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync(__dirname + '/src/events').filter(file => file.endsWith('.js'));
 eventFiles.forEach(fEvt => {
 	const eventName = fEvt.split('.')[0];
 	const event = require(`./src/events/${fEvt}`);

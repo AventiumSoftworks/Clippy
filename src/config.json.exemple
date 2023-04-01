@@ -1,5 +1,23 @@
 {
-    "botOwners": [],
-    "token": "Token ici",
-    "prefix": "Préfixe ici"
+    "botOwners": ["putEvalUsersHere"],
+    "token": "putYourBotTokenHere",
+    "hastebinToken": "putYourHastebinTokenHere",
+    "prefix": "prefixForEval",
+    "urls": {
+        "allowed_urls":[
+            "https://pastebin.com",
+            "https://termbin.com",
+            "https://hastebin.com"
+        ],
+        "max_content_size_in_bytes": 8388608
+    },
+    "images": {
+        "message_reaction": "👀",
+        "max_size_in_bytes": 8388608,
+        "delete_reaction": "❌"
+    },
+    "witToken": "putYourTrainedClientWitToken",
+    "allowedChannels": ["putChannelsWhereBotShouldReply"],
+    "frenchChannels": ["putTextChannelsWhereBotShouldReply"],
+    "frenchTags": ["putTagsIdHereWhenBotShouldReplyInFrench"]
 }

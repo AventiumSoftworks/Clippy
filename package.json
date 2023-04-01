@@ -10,20 +10,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/geekcornergh/clippy.git"
+    "url": "git+https://github.com/aventiumsoftworks/clippy.git"
   },
   "author": "GeekCorner",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/geekcornergh/clippy/issues"
+    "url": "https://github.com/aventiumsoftworks/clippy/issues"
   },
-  "homepage": "https://github.com/geekcornergh/clippy#readme",
+  "homepage": "https://github.com/aventiumsoftworks/clippy#readme",
   "dependencies": {
-    "discord-reply": "^0.1.2",
-    "discord.js": "^13.1.0",
-    "eslint": "^8.8.0",
-    "fs-extra": "^10.0.0",
-    "node-fetch": "^2.6.1",
-    "psl": "^1.8.0"
+    "discord.js": "^14.7.1",
+    "eslint": "^8.36.0",
+    "fs-extra": "^11.1.0",
+    "node-wit": "^6.6.0",
+    "psl": "^1.9.0",
+    "regex-parser": "^2.2.11",
+    "tesseract.js": "^4.0.2"
   }
 }
