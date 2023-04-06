@@ -1,10 +1,14 @@
 module.exports = {
-	title: "Error Codes",
+	title: "Codes d'erreurs fréquents",
 	description: null,
 	fields: [
 		{
 			title: "ETIMEDOUT",
 			description: "Une connexion réseau a été interrompue par manque de temps avant d'être terminée."
+		},
+		{
+			title : "ECONNREFUSED",
+			description : "Le serveur a refusé la connexion. Cela se produit souvent lorsque le serveur web n'a pas démarré"
 		},
 		{
 			title: "EHOSTUNREACH",

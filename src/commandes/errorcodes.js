@@ -1,10 +1,14 @@
 module.exports = {
-	title: "Error Codes",
+	title: "Common error codes",
 	description: null,
 	fields: [
 		{
 			title: "ETIMEDOUT",
 			description: "A network connection timed out before completing."
+		},
+		{
+			title: "ECONNREFUSED",
+			description: "The server refused the connection. It often occurs when the web server hasn't started"
 		},
 		{
 			title: "EHOSTUNREACH",
