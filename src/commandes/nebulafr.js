@@ -36,7 +36,7 @@ module.exports = {
 		},
 		{
 			"title": "9.",
-			"description": "Sur ton launcher, dans `app/assets/js/distromanager.js` ligne 540, modifie l'url pour qu'elle corresponde à l'url de ton distribution.json."
+			"description": "Sur ton launcher, dans `app/assets/js/distromanager.js` ligne 7, modifie l'url pour qu'elle corresponde à l'url de ton distribution.json."
 		}
 	]
 }
