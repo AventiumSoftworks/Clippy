@@ -113,7 +113,6 @@ module.exports = async (client, message) => {
         }
     }
     else {
-        if(message.content.length > 280) return;
         if(!allowedChannels.includes(message.channel.isThread()? message.channel.parentId : message.channelId)) return;
         let suffix = "";
         let isThreadFr = false;

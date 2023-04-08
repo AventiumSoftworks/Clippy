@@ -114,15 +114,18 @@ class ContentValidator {
 			console.log('[PARSER] no match found.')
 			return null;
 		}*/
-		const req = await witClient.message(text);
-		if (!req.intents) return;
-		const intent = req.intents[0];
-		if (!intent) return
-		if (intent.confidence && !isNaN(intent.confidence) && intent.confidence < 0.9) return;
-		return {
-			key: this.responses[intent.name],
-			confidence: intent.confidence
-		};
+		if (text.length <= 280) {
+			const req = await witClient.message(text);
+			if (!req.intents) return;
+			const intent = req.intents[0];
+			if (!intent) return
+			if (intent.confidence && !isNaN(intent.confidence) && intent.confidence < 0.9) return;
+			return {
+				key: this.responses[intent.name],
+				confidence: intent.confidence
+			};
+		}
+		else return;
 
 	}
 }
