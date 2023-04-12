@@ -5,6 +5,7 @@ const { urls, images, hastebinToken, witToken } = require(__dirname + '/../confi
 const urlExpression = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$/mg;
 const { Wit } = require("node-wit");
 const witClient = new Wit({ accessToken: witToken });
+const RegexParser = require("regex-parser");
 
 
 
@@ -13,7 +14,15 @@ class ContentValidator {
 	 * @param {array} responses
 	 */
 	constructor(responses) {
-		this.responses = responses;
+		this.responses = {
+			wit: responses.wit,
+			regex: responses.regex.map(r => {
+				return {
+					key: RegexParser(r.key),
+					content: r.content
+				}
+			})
+		};
 	}
 
 	/**
@@ -105,30 +114,51 @@ class ContentValidator {
 	 */
 	async checkMatches(text) {
 		console.log('[PARSER] text: \n' + text)
-		/*let index = this.responses.findIndex(response => text.match(response.key))
-
-		if (index !== -1) {
-			console.log('[PARSER] match found!')
-			return this.responses[index];
-		} else {
-			console.log('[PARSER] no match found.')
-			return null;
-		}*/
+		let match = null;
 		if (text.length <= 280) {
+			console.log("in wit.ai")
 			const req = await witClient.message(text);
-			if (!req.intents) return;
+			console.log(req)
 			const intent = req.intents[0];
-			if (!intent) return
-			if (intent.confidence && !isNaN(intent.confidence) && intent.confidence < 0.9) return;
-			return {
-				key: this.responses[intent.name],
-				confidence: intent.confidence
+			if (!intent) {
+				match = null;
+				return match;
 			};
+			if (intent.name && this.responses.wit[intent.name] && intent.confidence && !isNaN(intent.confidence) && intent.confidence > 0.95) {
+				console.log('[PARSER] wit match found!')
+					match = {
+						key: this.responses.wit[intent.name],
+						confidence: intent.confidence,
+						type: "wit"
+					};
+					return match;
+			}
 		}
-		else return;
-
+		if (match == null) {
+			console.log("in regex")
+			let index = -1;
+			this.responses.regex.forEach((response, i) => {
+				const test = text.match(response.key);
+				if (test) {
+					match = response.content;
+					index = i;
+				}
+			});
+			if (index !== -1) {
+				console.log('[PARSER] match found!');
+				match = {
+					key: match,
+					type: "regex"
+				}
+				return match;
+			} else {
+				console.log('[PARSER] no match found.');
+				match = null
+				return match;
+			}
+		}
+		return match
 	}
 }
-
 
 module.exports = ContentValidator;

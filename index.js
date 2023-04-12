@@ -18,12 +18,6 @@ const client = new Client({
 	]
 });
 
-
-// Commandes slash
-//require("./src/interactions/slash")(client);
-//require("./src/interactions/buttons")(client);
-
-
 // Handler Events
 const eventFiles = fs.readdirSync(__dirname + '/src/events').filter(file => file.endsWith('.js'));
 eventFiles.forEach(fEvt => {

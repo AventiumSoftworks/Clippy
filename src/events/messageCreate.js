@@ -125,8 +125,8 @@ module.exports = async (client, message) => {
         }
         if (frenchChannels.includes(message.channel.isThread()? message.channel.parentId : message.channelId)||isThreadFr===true) suffix="fr"; 
         let res = await parser.validateContent(message)
-        if (!res) {
-            if (messa === "good bot") return await message.react("❤️")
+        if (res == null) {
+            if (message.content.toLowerCase() === "good bot") return await message.react("❤️")
             if (message.reactions.cache.get(images.message_reaction) && message.reactions.cache.get(images.message_reaction).me) await message.reactions.cache.get(images.message_reaction).users.remove(client.user.id);
         }
         else {
@@ -136,8 +136,8 @@ module.exports = async (client, message) => {
                 .setTitle(file.title)
                 .setColor("Blurple")
                 .setDescription(file.description ?? null)
-                .setTimestamp()
-                .setFooter({text: `Confidence: ${res.confidence} - Replied when it shouldn't? Please mention GeekCorner`});
+                .setTimestamp();
+            res.type == "wit"? embed.setFooter({text: `Confidence: ${res.confidence} - Replied when it shouldn't? Please mention GeekCorner`}) : null;
             file.fields.forEach(field => {
                 embed.addFields({ name: field.title, value: field.description });
             });
