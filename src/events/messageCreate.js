@@ -1,10 +1,13 @@
-const { images, prefix, botOwners, allowedChannels, frenchChannels, frenchTags } = require("../config.json");
+const { images, prefix, botOwners, allowedChannels, frenchChannels, frenchTags, files } = require("../config.json");
 const responses = require("./../replies/replies.json");
 const messageParser = require("../replies/AutoReplies")
 const { ButtonBuilder, ActionRowBuilder, EmbedBuilder, REST, Routes, SlashCommandBuilder, ButtonStyle, ChannelType } = require("discord.js");
 const antiw = require("../antiNitro");
 const fs = require("node:fs");
-const parser = new messageParser(responses)
+const { Wit } = require("node-wit");
+const { witToken } = require(__dirname + '/../config.json')
+const witClient = new Wit({ accessToken: witToken });
+const parser = new messageParser(responses);
 module.exports = async (client, message) => {
     if (message.author.bot || message.webhookID) return;
     const messa = message.content.toLowerCase();
@@ -103,7 +106,7 @@ module.exports = async (client, message) => {
                 evaled = evaled.substr(0, 1950);
             }
 
-            message.reply("```xl\n" + clean(evaled)+ "\n```");
+            message.reply("```xl\n" + clean(evaled) + "\n```");
         } catch (err) {
             message.reply(`\`ERREOR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
         };
@@ -113,31 +116,51 @@ module.exports = async (client, message) => {
         }
     }
     else {
-        if(!allowedChannels.includes(message.channel.isThread()? message.channel.parentId : message.channelId)) return;
+        if (!allowedChannels.includes(message.channel.isThread() ? message.channel.parentId : message.channelId)) return;
         let suffix = "";
         let isThreadFr = false;
-        if(message.channel.parent.type==ChannelType.GuildForum) {
+        if (message.channel.parent.type == ChannelType.GuildForum) {
             message.channel.appliedTags.forEach(tag => {
-                if(frenchTags.includes(tag)) {
-                    isThreadFr=true;
+                if (frenchTags.includes(tag)) {
+                    isThreadFr = true;
                 }
             })
         }
-        if (frenchChannels.includes(message.channel.isThread()? message.channel.parentId : message.channelId)||isThreadFr===true) suffix="fr"; 
-        let res = await parser.validateContent(message)
-        if (res == null) {
+        let pasteurl = null;
+        if (frenchChannels.includes(message.channel.isThread() ? message.channel.parentId : message.channelId) || isThreadFr === true) suffix = "fr";
+        if (message.attachments.size > 0) {
+            const autoPost = await handleAttachments(message.attachments);
+            if (autoPost) {
+                message.attachments = [];
+                message.content = files.urlToPasteTextFiles + "/" + autoPost;
+                pasteurl = message.content
+                message.reply({content: "It's better to use a paste service: " + message.content, allowedMentions: {
+                    repliedUser: false
+                }})
+            }
+
+        }
+        let match = null;
+        const res = await witChecks(message.content);
+        if (res) match = res
+        else {
+            if (pasteurl !== null) message.content=pasteurl;
+            const res2 = await parser.validateContent(message)
+            if (res2) match = res2
+        }
+        if (match === null) {
             if (message.content.toLowerCase() === "good bot") return await message.react("❤️")
             if (message.reactions.cache.get(images.message_reaction) && message.reactions.cache.get(images.message_reaction).me) await message.reactions.cache.get(images.message_reaction).users.remove(client.user.id);
         }
         else {
             if (message.reactions.cache.get(images.message_reaction) && message.reactions.cache.get(images.message_reaction).me) await message.reactions.cache.get(images.message_reaction).users.remove(client.user.id);
-            const file = require("../commandes/" + res.key + suffix)
+            const file = require("../commandes/" + match.key + suffix)
             let embed = new EmbedBuilder()
                 .setTitle(file.title)
                 .setColor("Blurple")
                 .setDescription(file.description ?? null)
                 .setTimestamp();
-            res.type == "wit"? embed.setFooter({text: `Confidence: ${res.confidence} - Replied when it shouldn't? Please mention GeekCorner`}) : null;
+            match.type == "wit" ? embed.setFooter({ text: `Confidence: ${match.confidence} - Replied when it shouldn't? Please mention GeekCorner` }) : null;
             file.fields.forEach(field => {
                 embed.addFields({ name: field.title, value: field.description });
             });
@@ -146,3 +169,50 @@ module.exports = async (client, message) => {
     }
     //done
 };
+
+async function witChecks(text) {
+    if (!text) return null;
+    if (text.length <= 280) {
+        let match = null;
+        const req = await witClient.message(text);
+        const intent = req.intents[0];
+        if (!intent) {
+            match = null;
+            return match;
+        };
+        if (intent.name && responses.wit[intent.name] && intent.confidence && !isNaN(intent.confidence) && intent.confidence > 0.95) {
+            console.log('[PARSER] wit match found!')
+            match = {
+                key: responses.wit[intent.name],
+                confidence: intent.confidence,
+                type: "wit"
+            };
+            return match;
+        }
+        return match;
+    }
+    else return null;
+}
+
+async function handleAttachments(array) {
+    let shouldStop = false;
+    let element = null;
+    array.forEach(a => {
+        if (shouldStop == true) return;
+        if (!a.contentType.includes("charset=utf-8")) return;
+        shouldStop = true
+        element = a;
+    })
+    console.log(JSON.stringify(element))
+    const file = await fetch(element.url, {
+        responseType: "arraybuffer"
+    })
+    const buffer = (await file.text()).toString()
+    const send = await fetch(require("../config.json").files.urlToPasteTextFiles +"/documents", {
+        method: "POST",
+        body: buffer,
+        headers: { 'Content-Type': 'application/json' },
+    })
+    const res = await send.json()
+    return res.key
+}

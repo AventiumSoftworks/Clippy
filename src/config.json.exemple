@@ -1,23 +1,26 @@
 {
-    "botOwners": ["putEvalUsersHere"],
-    "token": "putYourBotTokenHere",
-    "hastebinToken": "putYourHastebinTokenHere",
-    "prefix": "prefixForEval",
+    "botOwners": ["useridhere"],
+    "token": "discordbottokenhere",
+    "hastebinToken": "hastebintokenhere",
+    "prefix": "prefixHere-",
     "urls": {
         "allowed_urls":[
             "https://pastebin.com",
             "https://termbin.com",
             "https://hastebin.com"
         ],
-        "max_content_size_in_bytes": 8388608
+        "max_content_size_in_bytes": 26214400
     },
     "images": {
         "message_reaction": "👀",
-        "max_size_in_bytes": 8388608,
-        "delete_reaction": "❌"
+        "max_size_in_bytes": 26214400
     },
-    "witToken": "putYourTrainedClientWitToken",
-    "allowedChannels": ["putChannelsWhereBotShouldReply"],
-    "frenchChannels": ["putTextChannelsWhereBotShouldReply"],
-    "frenchTags": ["putTagsIdHereWhenBotShouldReplyInFrench"]
+    "files": {
+        "urlToPasteTextFiles": "https://hastebin.com",
+        "max_size_in_bytes": 26214400
+    },
+    "witToken": "readaccesstoken",
+    "allowedChannels": ["supportchannelidhere"],
+    "frenchChannels": ["frenchchannelsHere"],
+    "frenchTags": ["frenchforumstaghere"]
 }
