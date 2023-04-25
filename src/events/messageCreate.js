@@ -141,7 +141,7 @@ module.exports = async (client, message) => {
 
         }
         let match = null;
-        const res = message.content ? await witChecks(message.content):undefined;
+        const res = message.content && message.content.length <= 280 ? await witChecks(message.content):undefined;
         if (res) match = res
         else {
             if (pasteurl !== null) message.content=pasteurl;
