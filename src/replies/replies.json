@@ -3,12 +3,17 @@
 		"use_crack": "crack",
 		"use_nebula": "nebula",
 		"bad_host": "webhost",
-		"stuck_99": "99"
+		"stuck_99": "99",
+		"coremods": "coremods"
 	},
 	"regex": [
 		{
 			"key": "\\b(?:ECONNRESET|ETIMEDOUT|ECONNREFUSED|EHOSTUNREACH|ENETUNREACH|ESOCKETTIMEDOUT)\\b",
 			"content": "errorcodes"
+		},
+		{
+			"key": "(?:You must include the right dependencies for|Claritas failed to yield metadata for ForgeMod [\\w\\s]+\\.jar!)",
+			"content": "coremods"
 		}
 	]
 }
