@@ -14,6 +14,10 @@
 		{
 			"key": "(?:You must include the right dependencies for|Claritas failed to yield metadata for ForgeMod [\\w\\s]+\\.jar!)",
 			"content": "coremods"
+		},
+		{
+			"key": "^<@(169197209630277642|710836174050164757|331433556867940353|423810936587943937)>$",
+			"content": "mention"
 		}
 	]
 }
