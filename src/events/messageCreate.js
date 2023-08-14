@@ -134,7 +134,7 @@ module.exports = async (client, message) => {
                 message.attachments = [];
                 message.content = files.urlToPasteTextFiles + "/" + autoPost;
                 pasteurl = message.content
-                message.reply({content: "It's better to use a paste service: " + message.content, allowedMentions: {
+                message.reply({content: "It's better to use a paste service. For your convenience, I auto pasted your file. [Link](" + message.content + ")", allowedMentions: {
                     repliedUser: false
                 }})
             }
