@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/aventiumsoftworks/clippy#readme",
   "dependencies": {
-    "discord.js": "^14.13.0",
+    "discord.js": "^14.14.1",
     "eslint": "^8.53.0",
     "fs-extra": "^11.1.1",
     "node-wit": "^6.6.0",
