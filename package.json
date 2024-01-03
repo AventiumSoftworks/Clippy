@@ -24,7 +24,7 @@
     "fs-extra": "^11.1.1",
     "node-wit": "^6.6.0",
     "psl": "^1.9.0",
-    "regex-parser": "^2.2.11",
+    "regex-parser": "^2.3.0",
     "tesseract.js": "^5.0.3"
   }
 }

@@ -21,8 +21,8 @@ dependencies:
     specifier: ^1.9.0
     version: 1.9.0
   regex-parser:
-    specifier: ^2.2.11
-    version: 2.2.11
+    specifier: ^2.3.0
+    version: 2.3.0
   tesseract.js:
     specifier: ^5.0.3
     version: 5.0.3
@@ -1187,8 +1187,8 @@ packages:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
     dev: false
 
-  /regex-parser@2.2.11:
-    resolution: {integrity: sha512-jbD/FT0+9MBU2XAZluI7w2OBs1RBi6p9M83nkoZayQXXU9e8Robt69FcZc7wU4eJD/YFTjn1JdCk3rbMJajz8Q==}
+  /regex-parser@2.3.0:
+    resolution: {integrity: sha512-TVILVSz2jY5D47F4mA4MppkBrafEaiUWJO/TcZHEIuI13AqoZMkK1WMA4Om1YkYbTx+9Ki1/tSUXbceyr9saRg==}
     dev: false
 
   /resolve-from@4.0.0:
