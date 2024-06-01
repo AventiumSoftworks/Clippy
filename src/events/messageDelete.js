@@ -8,5 +8,5 @@ module.exports = async (client, message) => {
         .setTitle("Message contents")
         .setColor("Red")
         .setDescription(message.content);
-    client.channels.cache.get(config.logsChannelId).send({ content: "A message has been deleted", embeds: [embed1] })
+    client.channels.cache.get(config.logsChannelId).send({ content: `A message has been deleted in ${message.channel.toString()}`, embeds: [embed1] })
 }
