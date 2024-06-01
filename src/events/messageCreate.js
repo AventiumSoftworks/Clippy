@@ -46,7 +46,7 @@ module.exports = async (client, message) => {
     }
     if (message.content == `${prefix}register_commands`) {
         const slash = [];
-        if (!botOwners.includes(message.author.id)) return message.reply(`Hello <@${message.author.id}>, you don't have permission to register slash commands.`, new Discord.MessageEmbed().setImage("https://media2.giphy.com/media/Ju7l5y9osyymQ/giphy.gif"));
+        if (!botOwners.includes(message.author.id)) return message.reply(`Hello <@${message.author.id}>, you don't have permission to register slash commands.`, new Discord.EmbedBuilder().setImage("https://media2.giphy.com/media/Ju7l5y9osyymQ/giphy.gif"));
         await message.react("👌");
         const cmds = fs.readdirSync(__dirname + '/../commandes/').filter(file => file.endsWith('.js'));
         cmds.forEach(async file => {

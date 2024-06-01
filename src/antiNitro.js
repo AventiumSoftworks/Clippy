@@ -105,7 +105,7 @@ const trigger = async (message, client) => {
     message.channel.send("<@" + message.author.id + ">'s account might be compromised.");
     let time = message.createdTimestamp
 
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.EmbedBuilder()
         .setTitle('A user may be compromised')
         .setColor(0xFF0000)
         .setDescription(message.content)
