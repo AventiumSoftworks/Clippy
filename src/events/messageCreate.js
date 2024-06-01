@@ -40,8 +40,8 @@ module.exports = async (client, message) => {
                 .setTitle("Click the buttons to get/remove a user role!")
                 .setColor("Blurple")
                 .setDescription("👤 User - General role\n🌅 Helios User - Helios Launcher specific role")
-                .addFields({ name: "You cann't invite me on your server, but I am open source!", value: "[Source Code](https://github.com/AventiumSoftworks/Clippy)" })
-                .setFooter({ text: "Made with ❤ by GeekCornerD#8010", iconURL: "https://cdn.discordapp.com/avatars/710836174050164757/a_46c1958617a1d46fa46fab0663965ff8.gif?size=1024" })], components: [new ActionRowBuilder().addComponents([helios, user])]
+                .addFields({ name: "You can't invite me on your server, but I am open source!", value: "[Source Code](https://github.com/AventiumSoftworks/Clippy)" })
+                .setFooter({ text: "Made with ❤ by GeekCorner", iconURL: "https://github.com/geekcornergh.png" })], components: [new ActionRowBuilder().addComponents([helios, user])]
         });
     }
     if (message.content == `${prefix}register_commands`) {
@@ -52,11 +52,22 @@ module.exports = async (client, message) => {
         cmds.forEach(async file => {
             const cmdName = file.split('.')[0];
             const cmdFile = require(`${__dirname}/../commandes/${cmdName}`);
-            slash.push(new SlashCommandBuilder().setName(cmdName).setDescription(cmdFile.title).addUserOption(o => o.setName("user").setDescription(cmdName.endsWith("fr") ? "L'utilisateur à mentionner" : "The user to tag").setRequired(false)).toJSON())
+            if(cmdName == 'google') {
+                google = new SlashCommandBuilder().setName(cmdName).setDescription(cmdFile.description)
+                google.addStringOption(o => o.setName("language").setDescription("Which language the answer will be in").setRequired(true).addChoices(
+                    { name: 'Français', value: 'fr' },
+                    { name: 'English', value: 'en' },
+                ))
+                google.addStringOption(o => o.setName("search").setDescription("The search that the user didn't do by himself").setRequired(true))
+                google.addUserOption(o => o.setName("user").setDescription("The user to tag").setRequired(false))
+                slash.push(google.toJSON())
+            } else {
+                slash.push(new SlashCommandBuilder().setName(cmdName).setDescription(cmdFile.title).addUserOption(o => o.setName("user").setDescription(cmdName.endsWith("fr") ? "L'utilisateur à mentionner" : "The user to tag").setRequired(false)).toJSON())
+            }
             delete require.cache[require.resolve(`${__dirname}/../commandes/${cmdName}`)];
         });
         const rest = new REST({ version: '10' }).setToken(client.token);
-        await rest.put(Routes.applicationCommands(client.user.id), { body: slash })
+        await rest.put(Routes.applicationCommands(client.user.id), { body: slash }) 
         await message.reply("I asked Discord to save the slash commands. Changes can take up to an hour to apply.")
     }
     //debug
