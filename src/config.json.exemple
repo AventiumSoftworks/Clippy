@@ -22,5 +22,7 @@
     "witToken": "readaccesstoken",
     "allowedChannels": ["supportchannelidhere"],
     "frenchChannels": ["frenchchannelsHere"],
-    "frenchTags": ["frenchforumstaghere"]
+    "frenchTags": ["frenchforumstaghere"],
+    "logsChannelId": "placeholder",
+    "loggedServers": ["placeholder"]
 }
