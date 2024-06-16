@@ -40,7 +40,7 @@ module.exports = async (client, message) => {
                 .setTitle("Click the buttons to get/remove a user role!")
                 .setColor("Blurple")
                 .setDescription("👤 User - General role\n🌅 Helios User - Helios Launcher specific role")
-                .addFields({ name: "You cann't invite me on your server, but I am open source!", value: "[Source Code](https://github.com/AventiumSoftworks/Clippy)" })
+                .addFields({ name: "You can't invite me on your server, but I am open source!", value: "[Source Code](https://github.com/AventiumSoftworks/Clippy)" })
                 .setFooter({ text: "Made with ❤ by GeekCornerD", iconURL: "https://cdn.discordapp.com/avatars/710836174050164757/a_46c1958617a1d46fa46fab0663965ff8.gif?size=1024" })], components: [new ActionRowBuilder().addComponents([helios, user])]
         });
     }
