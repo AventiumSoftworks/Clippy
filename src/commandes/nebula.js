@@ -20,7 +20,7 @@ module.exports = {
 		},
 		{
 			"title": "5.",
-			"description": "Create your server using `npm start -- generate server [server name] [Minecraft Version eg 1.12.2] --forge [forge version eg 14.23.5.2859]`. Please note Forge is required."
+			"description": "Create your server using `npm start -- generate server [server name] [Minecraft Version eg 1.12.2] --forge [forge version eg 14.23.5.2859] or --fabric [fabric version eg 0.16.10]`. Please note Forge or Fabric is required. \n Note: For some reasons Powershell doesn't pass arguments correctly so make sure to run this in cmd also called Command Prompt."
 		},
 		{
 			"title": "6.",
