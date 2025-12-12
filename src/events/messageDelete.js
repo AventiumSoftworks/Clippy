@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const config = require("../config.json");
 
 module.exports = async (client, message) => {
-    if (message.member.id === client.user.id ||!message.guild || !config.loggedServers.includes(message.guild.id) || !message.content) return;
+    if (message.author.id === client.user.id ||!message.guild || !config.loggedServers.includes(message.guild.id) || !message.content) return;
     const embed1 = new EmbedBuilder()
     .setAuthor({ name: `${message.member.displayName} (${message.member.id})`, iconURL: `${message.member.displayAvatarURL()}` })
         .setTitle("Message contents")
