@@ -24,7 +24,7 @@ module.exports = async (client, message) => {
             await message.guild.members.unban(message.author.id, "Automatic unban of the compromised");
             await client.channels.cache.get(logsChannelId).send({ content: `<@${message.author.id}> (${message.author.displayName}, \`${message.author.id}\`) has been softbanned because they posted in the honeypot channel.`})
         }
-        else await client.channels.cache.get("235510746870579201").send(`<@710836174050164757> unable to softban <@${message.author.id}>\n${e.toString()}`)
+        else await client.channels.cache.get("235510746870579201").send(`<@710836174050164757> unable to softban <@${message.author.id}>`)
     }
     if (message.author.bot || message.webhookID) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);
