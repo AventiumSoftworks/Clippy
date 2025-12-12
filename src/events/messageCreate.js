@@ -10,8 +10,8 @@ const witClient = new Wit({ accessToken: witToken });
 const parser = new messageParser(responses);
 module.exports = async (client, message) => {
     if (message.channel.id === honeypotChannelId) {
-        const { id, isBannable } = message.member ?? { isBannable: false };
-        if (isBannable) {
+        const { id, bannable } = message.member ?? { bannable: false };
+        if (bannable) {
             try {
                 const embed = new EmbedBuilder()
                     .setTitle("Your account seems to be compromised.")
