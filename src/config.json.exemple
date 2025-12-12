@@ -24,5 +24,6 @@
     "frenchChannels": ["frenchchannelsHere"],
     "frenchTags": ["frenchforumstaghere"],
     "logsChannelId": "placeholder",
-    "loggedServers": ["placeholder"]
+    "loggedServers": ["placeholder"],
+    "honeypotChannelId": "placeholder"
 }

@@ -1,0 +1,5 @@
+onlyBuiltDependencies:
+  - tesseract.js
+
+packages:
+  - .

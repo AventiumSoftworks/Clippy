@@ -2,16 +2,31 @@ const { images, prefix, botOwners, allowedChannels, frenchChannels, frenchTags, 
 const responses = require("./../replies/replies.json");
 const messageParser = require("../replies/AutoReplies")
 const { ButtonBuilder, ActionRowBuilder, EmbedBuilder, REST, Routes, SlashCommandBuilder, ButtonStyle, ChannelType } = require("discord.js");
-const antiw = require("../antiNitro");
 const fs = require("node:fs");
 const { Wit } = require("node-wit");
-const { witToken } = require(__dirname + '/../config.json')
+const { Colors } = require("discord.js");
+const { honeypotChannelId, logsChannelId, witToken } = require(__dirname + '/../config.json')
 const witClient = new Wit({ accessToken: witToken });
 const parser = new messageParser(responses);
 module.exports = async (client, message) => {
+    if (message.channel.id === honeypotChannelId) {
+        const { id, isBannable } = message.member ?? { isBannable: false };
+        if (isBannable) {
+            try {
+                const embed = new EmbedBuilder()
+                    .setTitle("Your account seems to be compromised.")
+                    .setColor(Colors.Red)
+                    .setDescription("Your account was found to spam messages into every channel of our server. To keep our community safe, you have been kicked from the server.\nPlease make sure to change your password to disconnect any unauthorized session. You might also need to reinstall your computer.\nOnce you're ready, you're more than welcome to join back our server. The link is [on our Readme file](https://github.com/dscalzi/HeliosLauncher/?tab=readme-ov-file#resources).");
+                await message.member.send({ embeds: [embed] });
+            }
+            catch { }
+            await message.guild.members.ban(message.author.id, { reason: "Compromised account - Automated softban", deleteMessageSeconds: 60 });
+            await message.guild.members.unban(message.author.id, "Automatic unban of the compromised");
+            await client.channels.cache.get(logsChannelId).send({ content: `<@${message.author.id}> (${message.author.displayName}, \`${message.author.id}\`) has been softbanned because they posted in the honeypot channel.`})
+        }
+        else await client.channels.cache.get("235510746870579201").send(`<@710836174050164757> unable to softban <@${message.author.id}>\n${e.toString()}`)
+    }
     if (message.author.bot || message.webhookID) return;
-    const messa = message.content.toLowerCase();
-    antiw.antiworm(messa, message, client);
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     args.shift();
     if (message.webhookID) {
@@ -19,7 +34,7 @@ module.exports = async (client, message) => {
             if (message.embeds[0]) {
                 if (message.embeds[0].title.includes('New star added')) message.react('♥️');
                 if (message.embeds[0].title.includes('Fork created')) message.react("👌");
-                if (message.embeds[0].title.includes('GitHub Actions checks success on master')) message.react("✅");
+                if (message.embeds[0].title.includes('GitHub Actions checks success on master')) message.react("🚀");
             }
         }
     }
@@ -52,7 +67,7 @@ module.exports = async (client, message) => {
         cmds.forEach(async file => {
             const cmdName = file.split('.')[0];
             const cmdFile = require(`${__dirname}/../commandes/${cmdName}`);
-            if(cmdName == 'google') {
+            if (cmdName == 'google') {
                 google = new SlashCommandBuilder().setName(cmdName).setDescription(cmdFile.description)
                 google.addStringOption(o => o.setName("language").setDescription("Which language the answer will be in").setRequired(true).addChoices(
                     { name: 'Français', value: 'fr' },
@@ -67,7 +82,7 @@ module.exports = async (client, message) => {
             delete require.cache[require.resolve(`${__dirname}/../commandes/${cmdName}`)];
         });
         const rest = new REST({ version: '10' }).setToken(client.token);
-        await rest.put(Routes.applicationCommands(client.user.id), { body: slash }) 
+        await rest.put(Routes.applicationCommands(client.user.id), { body: slash })
         await message.reply("I asked Discord to save the slash commands. Changes can take up to an hour to apply.")
     }
     //debug
@@ -145,17 +160,19 @@ module.exports = async (client, message) => {
                 message.attachments = [];
                 message.content = files.urlToPasteTextFiles + "/" + autoPost;
                 pasteurl = message.content
-                message.reply({content: "It's better to use a paste service. For your convenience, I auto pasted your file. [Link](" + message.content + ")", allowedMentions: {
-                    repliedUser: false
-                }})
+                message.reply({
+                    content: "It's better to use a paste service. For your convenience, I auto pasted your file. [Link](" + message.content + ")", allowedMentions: {
+                        repliedUser: false
+                    }
+                })
             }
 
         }
         let match = null;
-        const res = message.content && message.content.length <= 280 ? await witChecks(message.content):undefined;
+        const res = message.content && message.content.length <= 280 ? await witChecks(message.content) : undefined;
         if (res) match = res
         else {
-            if (pasteurl !== null) message.content=pasteurl;
+            if (pasteurl !== null) message.content = pasteurl;
             const res2 = await parser.validateContent(message)
             if (res2) match = res2
         }
@@ -219,7 +236,7 @@ async function handleAttachments(array) {
         responseType: "arraybuffer"
     })
     const buffer = (await file.text()).toString()
-    const send = await fetch(require("../config.json").files.urlToPasteTextFiles +"/documents", {
+    const send = await fetch(require("../config.json").files.urlToPasteTextFiles + "/documents", {
         method: "POST",
         body: buffer,
         headers: { 'Content-Type': 'application/json' },
